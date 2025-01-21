@@ -12,7 +12,7 @@ print(df)
 plt.xlabel('Area(sq ft)')
 plt.ylabel('Price(US $)')
 plt.scatter(df.Area,df.Price,color='red',marker='+')
-plt.show()
+#plt.show()
 
 #Defining the Model
 reg = linear_model.LinearRegression()
@@ -38,4 +38,17 @@ print(f"The intercept at Y-axis : {b}")
 prediction_manual= m*3300 + b 
 print(f"The cost of house with 3300 sq. ft. area is {prediction_manual[0]}")
 
-file=pd.read_excel("house_price.xlsx")
+
+#Performing More Operations 
+d=pd.read_excel("house_area.xlsx")
+p=reg.predict(d[["Area"]])
+new_data=pd.DataFrame({"Area":d['Area'],'Predicted_Price':p})
+
+#new_data.to_excel("House_Predicted_Price.xlsx",index=False)
+
+#PLOTTING LINEAR REGRESSION'S LINE GRAPH
+plt.xlabel('Area',fontsize=20)
+plt.ylabel('Price',fontsize=20)
+plt.scatter(df.Area,df.Price,color='red',marker='+')
+plt.plot(df.Area,reg.predict(df[['Area']]),color='blue')
+plt.show()
